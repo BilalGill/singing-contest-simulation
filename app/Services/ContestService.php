@@ -12,31 +12,18 @@ class ContestService
     public function createContest()
     {
         $contest = new ContestEntity();
-        $contest->completion_status = 2;
-
+        $contest->completion_status = 0;
         $contestModel = new ContestModel();
-        $contestModel->save($contest);
+        $contest->id = $contestModel->insert($contest);
 
-        $contest = $contestModel->find(2);
+        $judgeService = new JudgeService();
+        $judgeService->createContestJudges($contest);
 
-        $judgeModel = new JudgeModel();
+        $contestantService = new ContestantService();
+        $contestantService->createContestants($contest);
 
-        $randomJudge = $judgeModel->orderBy("RAND()")->findAll(3);
-
-        $contestJudgesList = array();
-
-        foreach ($randomJudge as $item=>$value)
-        {
-            $contestJudges = new ContestJudgeEntity();
-            $contestJudges->judge_id = $randomJudge[$item]->id;
-            $contestJudges->contest_id = 2;
-
-            $contestJudgesList[] = $contestJudges;
-        }
-
-        $contestJudgeModel = new ContestJudgeModel();
-        $contestJudgeModel->insertBatch($contestJudgesList);
-
+        $roundService = new RoundService();
+        $roundService->createContestRounds($contest);
 
         return $contest;
     }

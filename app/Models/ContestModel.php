@@ -9,5 +9,4 @@ class ContestModel extends Model
     protected $primaryKey = 'id';
     protected $allowedFields = ['completion_status'];
     protected $returnType = 'App\Entities\ContestEntity';
-
 }

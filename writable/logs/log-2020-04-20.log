@@ -1,0 +1,54 @@
+CRITICAL - 2020-04-20 08:52:24 --> Illegal offset type
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ContestantService.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal offset ...', '/Applications/M...', 32, Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(17): App\Services\ContestantService->createContestants()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-04-20 09:05:40 --> Illegal offset type
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ContestantService.php(36): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal offset ...', '/Applications/M...', 36, Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(17): App\Services\ContestantService->createContestants()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-04-20 09:06:53 --> Illegal offset type
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ContestantService.php(35): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal offset ...', '/Applications/M...', 35, Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(17): App\Services\ContestantService->createContestants()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-04-20 09:06:54 --> Illegal offset type
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ContestantService.php(35): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal offset ...', '/Applications/M...', 35, Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(17): App\Services\ContestantService->createContestants()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-04-20 10:55:56 --> Column 'completion_status' cannot be null
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/MySQLi/Connection.php(330): mysqli->query('INSERT INTO `co...')
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `co...')
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/BaseConnection.php(666): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `co...')
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/BaseBuilder.php(2206): CodeIgniter\Database\BaseConnection->query('INSERT INTO `co...', Array, false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/Model.php(722): CodeIgniter\Database\BaseBuilder->insert()
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ContestService.php(16): CodeIgniter\Model->insert(Array)
+#6 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(15): App\Services\ContestService->createContest()
+#7 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#8 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#9 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2020-04-20 10:56:52 --> Illegal offset type
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/JudgeService.php(22): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Illegal offset ...', '/Applications/M...', 22, Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ContestService.php(20): App\Services\JudgeService->createContestJudges(Object(App\Entities\ContestEntity))
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(15): App\Services\ContestService->createContest()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#6 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#7 {main}
