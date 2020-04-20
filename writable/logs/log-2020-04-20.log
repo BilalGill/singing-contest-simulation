@@ -52,3 +52,63 @@ CRITICAL - 2020-04-20 10:56:52 --> Illegal offset type
 #5 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
 #6 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
 #7 {main}
+CRITICAL - 2020-04-20 12:44:19 --> Argument 1 passed to CodeIgniter\Debug\Toolbar::__construct() must be an instance of CodeIgniter\Config\BaseConfig, null given, called in /Applications/MAMP/htdocs/singing-contest-simulation/system/Config/Services.php on line 841
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/system/Config/Services.php(841): CodeIgniter\Debug\Toolbar->__construct(NULL)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/Config/BaseService.php(123): CodeIgniter\Config\Services::toolbar(NULL, false)
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/Config/Services.php(833): CodeIgniter\Config\BaseService::getSharedInstance('toolbar', NULL)
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/Filters/DebugToolbar.php(75): CodeIgniter\Config\Services::toolbar()
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/Filters/Filters.php(188): CodeIgniter\Filters\DebugToolbar->after(Object(CodeIgniter\HTTP\IncomingRequest), Object(CodeIgniter\HTTP\Response))
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(416): CodeIgniter\Filters\Filters->run('contest', 'after')
+#6 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-04-20 16:24:38 --> syntax error, unexpected ')', expecting variable (T_VARIABLE)
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/system/Autoloader/Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->requireFile('/Applications/M...')
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/Autoloader/Autoloader.php(258): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Services\\Pr...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Services\\Pr...')
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Progress.php(10): spl_autoload_call('App\\Services\\Pr...')
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Progress->index()
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Progress))
+#6 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
+CRITICAL - 2020-04-20 16:27:19 --> Argument 1 passed to App\Services\ProgressService::executeContestantPerformance() must be an instance of App\Services\Contest, instance of App\Entities\ContestEntity given, called in /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ProgressService.php on line 36
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ProgressService.php(36): App\Services\ProgressService->executeContestantPerformance(Object(App\Entities\ContestEntity), Array, Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Progress.php(11): App\Services\ProgressService->progressContest()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Progress->index()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Progress))
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-04-20 16:27:41 --> Argument 2 passed to App\Services\ProgressService::executeContestantPerformance() must be an instance of App\Entities\RoundEntity, array given, called in /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ProgressService.php on line 37
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ProgressService.php(37): App\Services\ProgressService->executeContestantPerformance(Object(App\Entities\ContestEntity), Array, Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Progress.php(11): App\Services\ProgressService->progressContest()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Progress->index()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Progress))
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}
+CRITICAL - 2020-04-20 16:41:10 --> Unknown column 'contest_id' in 'where clause'
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/MySQLi/Connection.php(330): mysqli->query('SELECT *\nFROM `...')
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/BaseConnection.php(738): CodeIgniter\Database\MySQLi\Connection->execute('SELECT *\nFROM `...')
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/BaseConnection.php(666): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT *\nFROM `...')
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/BaseBuilder.php(1819): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/Model.php(445): CodeIgniter\Database\BaseBuilder->get()
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ProgressService.php(41): CodeIgniter\Model->findAll()
+#6 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Progress.php(11): App\Services\ProgressService->progressContest()
+#7 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Progress->index()
+#8 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Progress))
+#9 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2020-04-20 16:41:28 --> Class 'App\Entities\ContestGenreInfoEntity' not found
+#0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
+#1 {main}
+CRITICAL - 2020-04-20 16:56:35 --> Too few arguments to function App\Services\ProgressService::executeContestantPerformance(), 3 passed in /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ProgressService.php on line 43 and exactly 4 expected
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ProgressService.php(43): App\Services\ProgressService->executeContestantPerformance(Object(App\Entities\ContestEntity), Object(App\Entities\RoundEntity), Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Progress.php(11): App\Services\ProgressService->progressContest()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Progress->index()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Progress))
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#6 {main}

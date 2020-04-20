@@ -1,14 +1,18 @@
 <?php namespace App\Services;
 
 use App\Entities\ContestEntity;
-use App\Entities\JudgeEntity;
-use App\Entities\ContestJudgeEntity;
 use App\Models\ContestModel;
-use App\Models\JudgeModel;
-use App\Models\ContestJudgeModel;
 
 class ContestService
 {
+    public function getActiveContest()
+    {
+        $activeContests = array();
+        $contestModel = new ContestModel();
+        $activeContests = $contestModel->where('completion_status', '0')->find();
+        return $activeContests;
+    }
+
     public function createContest()
     {
         $contest = new ContestEntity();
@@ -16,6 +20,7 @@ class ContestService
         $contestModel = new ContestModel();
         $contest->id = $contestModel->insert($contest);
 
+        //TODO create static services methods
         $judgeService = new JudgeService();
         $judgeService->createContestJudges($contest);
 
