@@ -79,3 +79,147 @@ CRITICAL - 2020-04-19 20:36:39 --> Class 'App\Entities\Contest' not found
 CRITICAL - 2020-04-19 20:37:40 --> Class 'ContestEntity' not found
 #0 [internal function]: CodeIgniter\Debug\Exceptions->shutdownHandler()
 #1 {main}
+CRITICAL - 2020-04-19 21:22:24 --> Call to a member function last_query() on null
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:30:26 --> Call to a member function find() on null
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:40:41 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:12 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:13 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:13 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:13 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:13 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:13 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:13 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:14 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:41:15 --> Call to a member function orderBy() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:44:00 --> Call to a member function limit() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:44:01 --> Call to a member function limit() on array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 21:59:53 --> Object of class App\Entities\JudgeEntity could not be converted to string
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 22:00:12 --> Object of class App\Entities\JudgeEntity could not be converted to string
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 22:03:12 --> Cannot use object of type App\Entities\JudgeEntity as array
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#5 {main}
+CRITICAL - 2020-04-19 22:15:36 --> Object of class App\Entities\ContestJudgeEntity could not be converted to string
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/Query.php(443): strtr('INSERT INTO `co...', Array)
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/Query.php(404): CodeIgniter\Database\Query->matchNamedBinds('INSERT INTO `co...', Array)
+#2 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/Query.php(197): CodeIgniter\Database\Query->compileBinds()
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/BaseConnection.php(666): CodeIgniter\Database\Query->getQuery()
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/Database/BaseBuilder.php(2206): CodeIgniter\Database\BaseConnection->query('INSERT INTO `co...', Array, false)
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/system/Model.php(722): CodeIgniter\Database\BaseBuilder->insert()
+#6 /Applications/MAMP/htdocs/singing-contest-simulation/system/Model.php(550): CodeIgniter\Model->insert(Array, false)
+#7 /Applications/MAMP/htdocs/singing-contest-simulation/app/Services/ContestService.php(39): CodeIgniter\Model->save(Array)
+#8 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(14): App\Services\ContestService->createContest()
+#9 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#10 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#11 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#12 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#13 {main}
+CRITICAL - 2020-04-19 22:16:48 --> syntax error, unexpected ';', expecting ')'
+#0 /Applications/MAMP/htdocs/singing-contest-simulation/system/Autoloader/Autoloader.php(296): CodeIgniter\Autoloader\Autoloader->requireFile('/Applications/M...')
+#1 /Applications/MAMP/htdocs/singing-contest-simulation/system/Autoloader/Autoloader.php(258): CodeIgniter\Autoloader\Autoloader->loadInNamespace('App\\Services\\Co...')
+#2 [internal function]: CodeIgniter\Autoloader\Autoloader->loadClass('App\\Services\\Co...')
+#3 /Applications/MAMP/htdocs/singing-contest-simulation/app/Controllers/Contest.php(13): spl_autoload_call('App\\Services\\Co...')
+#4 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(910): App\Controllers\Contest->index()
+#5 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(398): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Contest))
+#6 /Applications/MAMP/htdocs/singing-contest-simulation/system/CodeIgniter.php(306): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 /Applications/MAMP/htdocs/singing-contest-simulation/public/index.php(45): CodeIgniter\CodeIgniter->run()
+#8 {main}
