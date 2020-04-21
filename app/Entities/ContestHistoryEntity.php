@@ -2,10 +2,10 @@
 
 use CodeIgniter\Entity;
 
-class ContestContestantEntity
+class ContestHistoryEntity
 {
     public $id;
     public $contest_id;
     public $contestant_id;
-    public $contest_score;
+    public $score;
 }

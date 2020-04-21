@@ -62,6 +62,7 @@ class ContestantService
             $contestContestantInfo = new ContestContestantEntity();
             $contestContestantInfo->contest_id = $contest->id;
             $contestContestantInfo->contestant_id = $contestant->id;
+            $contestContestantInfo->contest_score = 0;
 
             $contestContestantModel->insert($contestContestantInfo);
         }
