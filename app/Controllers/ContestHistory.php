@@ -11,7 +11,6 @@ class ContestHistory extends BaseController
 
 	public function getPreviousContestWinners()
     {
-        $historyService = new HistoryService();
-        $historyService->getPreviousContestWinners();
+        HistoryService::getPreviousContestWinners();
     }
 }

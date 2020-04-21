@@ -1,19 +1,17 @@
 <?php namespace App\Services;
 
 use App\Entities\ContestEntity;
-use App\Entities\JudgeEntity;
 use App\Entities\ContestJudgeEntity;
-use App\Models\ContestModel;
 use App\Models\JudgeModel;
 use App\Models\ContestJudgeModel;
 
 class JudgeService
 {
-    public function createContestJudges(ContestEntity $contest)
+    public static function createContestJudges(ContestEntity $contest)
     {
         $judgeModel = new JudgeModel();
 
-        $randomJudges = $judgeModel->orderBy("RAND()")->findAll(3);
+        $randomJudges = $judgeModel->orderBy("RAND()")->findAll(NUMBERS_OF_JUDGES_FOR_CONTEST);
         $contestJudgesList = array();
         foreach ($randomJudges as $judge)
         {
@@ -27,7 +25,7 @@ class JudgeService
         $contestJudgeModel->insertBatch($contestJudgesList);
     }
 
-    public function judgesRoundScoring(ContestEntity $contest, $contestantScore, $genre, $isContestantSick)
+    public static function judgesRoundScoring(ContestEntity $contest, $contestantScore, $genre, $isContestantSick)
     {
         $judgesScore = 0;
         $contestJudgeModel = new ContestJudgeModel();
@@ -39,15 +37,15 @@ class JudgeService
         foreach ($roundJudges as $judge)
         {
             if($judge->judge_type == "honest")
-                $judgesScore += $this->honestJudge($contestantScore);
+                $judgesScore += JudgeService::honestJudge($contestantScore);
             else if($judge->judge_type == "rock")
-                $judgesScore += $this->rockJudge($contestantScore, $genre);
+                $judgesScore += JudgeService::rockJudge($contestantScore, $genre);
             else if($judge->judge_type == "mean")
-                $judgesScore += $this->meanJudge($contestantScore);
+                $judgesScore += JudgeService::meanJudge($contestantScore);
             else if($judge->judge_type == "friendly")
-                $judgesScore += $this->friendlyJudge($contestantScore, $isContestantSick);
+                $judgesScore += JudgeService::friendlyJudge($contestantScore, $isContestantSick);
             else if($judge->judge_type == "random")
-                $judgesScore += $this->randomJudge($contestantScore);
+                $judgesScore += JudgeService::randomJudge($contestantScore);
         }
 
         return $judgesScore;
@@ -57,7 +55,7 @@ class JudgeService
         return rand(1,10);
     }
 
-    public function honestJudge($contestantScore)
+    public static function honestJudge($contestantScore)
     {
         $score = 0;
         if($contestantScore >= 0.1 && $contestantScore <= 10.0)
@@ -84,7 +82,7 @@ class JudgeService
         return $score;
     }
 
-    public function meanJudge($contestantScore)
+    public static function meanJudge($contestantScore)
     {
         if($contestantScore < 90.0)
             return 2;
@@ -92,7 +90,7 @@ class JudgeService
             return 10;
     }
 
-    public function rockJudge($contestantScore, $genre)
+    public static function rockJudge($contestantScore, $genre)
     {
         $score = 0;
 
@@ -113,7 +111,7 @@ class JudgeService
         return $score;
     }
 
-    public function friendlyJudge($contestantScore, $isContestantSick)
+    public static function friendlyJudge($contestantScore, $isContestantSick)
     {
         $score = 8;
         if($contestantScore <= 3.0)

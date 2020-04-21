@@ -1,13 +1,12 @@
 <?php namespace App\Services;
 
 
-use App\Models\ContestantModel;
 use App\Models\ContestContestantModel;
 use App\Models\ContestHistoryModel;
 
 class HistoryService
 {
-    public function saveCompletedContest($contest)
+    public static function saveCompletedContest($contest)
     {
         $contestantModel = new ContestContestantModel();
         $result = $contestantModel->getTopScorer($contest->id);
@@ -22,14 +21,14 @@ class HistoryService
             print_r("Unexpected error occurred");
     }
 
-    public function getPreviousContestWinners()
+    public static function getPreviousContestWinners()
     {
         $contestHistoryModel = new ContestHistoryModel();
-        $contestantWinners = $contestHistoryModel->orderBy('date_created', 'desc')->findAll(5);
+        $contestantWinners = $contestHistoryModel->orderBy('date_created', 'desc')->findAll(NUMBER_OF_PREVIOUS_CONTEST_WINNERS);
         print_r(json_encode($contestantWinners));
     }
 
-    public function getAllTimeWinner()
+    public static function getAllTimeWinner()
     {
         $contestHistoryModel = new ContestHistoryModel();
         $result = $contestHistoryModel->getAllTimeWinner();

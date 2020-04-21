@@ -5,7 +5,7 @@ use App\Models\ContestModel;
 
 class ContestService
 {
-    public function getActiveContest()
+    public static function getActiveContest()
     {
         $activeContests = array();
         $contestModel = new ContestModel();
@@ -13,7 +13,7 @@ class ContestService
         return $activeContests;
     }
 
-    public function createContest()
+    public static function createContest()
     {
         $contest = new ContestEntity();
         $contest->completion_status = 0;
@@ -21,14 +21,11 @@ class ContestService
         $contest->id = $contestModel->insert($contest);
 
         //TODO create static services methods
-        $judgeService = new JudgeService();
-        $judgeService->createContestJudges($contest);
+        JudgeService::createContestJudges($contest);
 
-        $contestantService = new ContestantService();
-        $contestantService->createContestants($contest);
+        ContestantService::createContestants($contest);
 
-        $roundService = new RoundService();
-        $roundService->createContestRounds($contest);
+        RoundService::createContestRounds($contest);
 
         return $contest;
     }

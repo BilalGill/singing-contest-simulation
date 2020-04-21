@@ -75,3 +75,9 @@ defined('EXIT_USER_INPUT')     || define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       || define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      || define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      || define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+
+defined('NUMBERS_OF_CONTESTANT')      || define('NUMBERS_OF_CONTESTANT', 10); //Number of contestants for a contest
+defined('NUMBERS_OF_JUDGES_FOR_CONTEST')      || define('NUMBERS_OF_JUDGES_FOR_CONTEST', 3); //Number of judges for a contest
+defined('NUMBER_OF_PREVIOUS_CONTEST_WINNERS')      || define('NUMBER_OF_PREVIOUS_CONTEST_WINNERS', 5); //Number of previous contest winners
+defined('SICKNESS_CHANCE')      || define('SICKNESS_CHANCE', 5); //Probability of getting sick

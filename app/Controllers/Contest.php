@@ -6,10 +6,9 @@ class Contest extends BaseController
 {
 	public function index()
 	{
-        $contestService = new ContestService();
-        $activeContest = $contestService->getActiveContest();
+        ContestService::getActiveContest();
         if(empty($activeContest))
-            $result = $contestService->createContest();
+            $result = ContestService::createContest();
         else
             print_r("Contest Already in progress");
 	}

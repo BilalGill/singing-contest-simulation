@@ -6,36 +6,30 @@ use App\Entities\RoundEntity;
 use App\Models\ContestantGenreInfoModel;
 use App\Models\ContestantModel;
 use App\Models\ContestContestantModel;
-use App\Models\ContestJudgeModel;
 use App\Models\ContestModel;
 use App\Models\GenreModel;
-use App\Models\JudgeModel;
 use App\Models\PerformanceModel;
 use App\Models\RoundModel;
 
 class ProgressService
 {
-    public function progressContest()
+    public static function progressContest()
     {
         $contestModel = new ContestModel();
-        $contestService = new ContestService();
-        $activeContest = $contestService->getActiveContest();
-        if(empty($activeContest))
-        {
+        $activeContest = ContestService::getActiveContest();
+        if (empty($activeContest)) {
             print_r("No Active Contest Found");
             return;
         }
         $activeContest = $activeContest[0];
 
         $roundModel = new RoundModel();
-        $round = $roundModel->where('contest_id', $activeContest->id)->where('completion_status',0)->orderBy('id','asc')->limit(1)->find();
-        if(empty($round))
-        {
+        $round = $roundModel->where('contest_id', $activeContest->id)->where('completion_status', 0)->orderBy('id', 'asc')->limit(1)->find();
+        if (empty($round)) {
             $activeContest->completion_status = 1;
             $contestModel->save($activeContest);
 
-            $historyService = new HistoryService();
-            $historyService->saveCompletedContest($activeContest);
+            HistoryService::saveCompletedContest($activeContest);
 
             print_r("All Rounds Completed");
             return;
@@ -55,30 +49,29 @@ class ProgressService
         $contestantGenreInfoModel = new ContestantGenreInfoModel();
         $contestantGenreInfo = $contestantGenreInfoModel->whereIn('contestant_id', $contestantIds)->where('genre_id', $round->genre_id)->findAll();
 
-        $this->executeContestantPerformance($activeContest, $round, $contestants, $contestantGenreInfo, $contestContestantsArray);
+        ProgressService::executeContestantPerformance($activeContest, $round, $contestants, $contestantGenreInfo, $contestContestantsArray);
 
         $round->completion_status = 1;
         $roundModel->save($round);
     }
 
-    public function executeContestantPerformance(ContestEntity $contest, RoundEntity $round, array $contestants, array $contestantGenreInfo, array &$contestContestantsArray)
+    public static function executeContestantPerformance(ContestEntity $contest, RoundEntity $round, array $contestants, array $contestantGenreInfo, array &$contestContestantsArray)
     {
         $contestContestantModel = new ContestContestantModel();
         $genreModel = new GenreModel();
         $genre = $genreModel->find($round->genre_id);
 
-        foreach ($contestantGenreInfo as $item)
-        {
-            $roundScore = $this->generateRoundPerformanceRandomScore();
+        foreach ($contestantGenreInfo as $item) {
+            $roundScore = ProgressService::generateRoundPerformanceRandomScore();
             $genreTotalScore = $roundScore * $item->strength;
 
-            $sicknessChance = 5;
             $isContestantSick = false;
-            if(rand(1,100)<=$sicknessChance)
-            {
-                $genreTotalScore = $genreTotalScore/2;
+            if (rand(1, 100) <= SICKNESS_CHANCE) {
+                $genreTotalScore = $genreTotalScore / 2;
                 $isContestantSick = true;
             }
+
+            $genreTotalScore =  ProgressService::ceiling($genreTotalScore, 1);
 
             $performanceModel = new PerformanceModel();
             $performance = new PerformanceEntity();
@@ -88,21 +81,30 @@ class ProgressService
 
             $performanceModel->insert($performance);
 
-            $judgesService = new JudgeService();
-            $judgeScore = $judgesService->judgesRoundScoring($contest, $genreTotalScore, $genre, $isContestantSick);
+            $judgeScore = JudgeService::judgesRoundScoring($contest, $genreTotalScore, $genre, $isContestantSick);
 
             $contestContestantsArray[$item->contestant_id]->contest_score += $judgeScore;
             $contestContestantModel->save($contestContestantsArray[$item->contestant_id]);
         }
     }
 
-    public function generateRoundPerformanceRandomScore()
+    public static function generateRoundPerformanceRandomScore()
     {
         $min = 0;
         $max = 10;
+        do{
+            $randomScore = rand($min * 10, $max * 10) / 10;
+            $randomScore = round($randomScore, 2);
+        } while ($randomScore < 0.1);
 
-        $randomStat = rand($min*10, $max*10)/10;
-        $randomStat = round($randomStat, 2);
-        return $randomStat;
+        return $randomScore;
+    }
+
+    public static function ceiling($value, $precision = 0) {
+        $offset = 0.5;
+        if ($precision !== 0)
+            $offset /= pow(10, $precision);
+        $final = round($value + $offset, $precision, PHP_ROUND_HALF_DOWN);
+        return ($final == -0 ? 0 : $final);
     }
 }

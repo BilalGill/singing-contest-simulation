@@ -15,23 +15,24 @@ use App\Models\ContestantModel;
 
 class ContestantService
 {
-    public function createContestants(ContestEntity $contest){
+    public static function createContestants(ContestEntity $contest){
 
         $contestantModel = new ContestantModel();
         $contestantList = array();
 
-        for($i=0;$i<10;$i++){
+        for($i=0;$i<NUMBERS_OF_CONTESTANT;$i++)
+        {
             $contestant = new ContestantEntity();
-            $contestant->judge_score = 0;
+            $contestant->date_created = date('Y-m-d G:i:s');
             $contestant->id = $contestantModel->insert($contestant);
             $contestantList[] = $contestant;
         }
 
-        $this->createContestantGenreInfo($contestantList);
-        $this->createContestContestants($contest, $contestantList);
+        ContestantService::createContestantGenreInfo($contestantList);
+        ContestantService::createContestContestants($contest, $contestantList);
     }
 
-    public function createContestantGenreInfo(array $contestantList)
+    public static function createContestantGenreInfo(array $contestantList)
     {
         $contestantGenreInfoModel = new ContestantGenreInfoModel();
         $genreModel = new GenreModel();
@@ -53,7 +54,7 @@ class ContestantService
         }
     }
 
-    public function createContestContestants(ContestEntity $contest, array $contestantList)
+    public static function createContestContestants(ContestEntity $contest, array $contestantList)
     {
         $contestContestantModel = new ContestContestantModel();
 
