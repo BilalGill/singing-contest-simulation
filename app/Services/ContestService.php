@@ -35,11 +35,11 @@ class ContestService
 
         $contest = new ContestEntity();
         $contest->completion_status = 0;
-        $contest->id = $contestModel->createContest($contest);
+        $contest->id = $contestModel->insert($contest);
 
         $result = JudgeService::createContestJudges($contest);
         if ($result[RESPONSE_CODE] != SUCCESS) {
-            $contestModel->deleteContest($contest);
+            $contestModel->delete($contest->id);
             $response[RESPONSE_CODE] = $result[RESPONSE_CODE];
 
             return $result;
@@ -47,7 +47,7 @@ class ContestService
 
         $result = ContestantService::createContestants($contest);
         if ($result[RESPONSE_CODE] != SUCCESS) {
-            $contestModel->deleteContest($contest);
+            $contestModel->delete($contest->id);
             $response[RESPONSE_CODE] = $result[RESPONSE_CODE];
 
             return $result;
@@ -93,8 +93,7 @@ class ContestService
         if(!empty($round))
         {
             $performanceModel = new PerformanceModel();
-//            $latestPerformance = $performanceModel->whereIn('contestant_id', $contestantIds)->where('round_id', $round->id)->findAll();
-            $latestPerformance = $performanceModel->getContestantsRoundPerformance();
+            $latestPerformance = $performanceModel->getContestantsRoundPerformance($contestantIds, $round->id);
             foreach ($latestPerformance as $performance) {
 
                 $contestantList[$performance->contestant_id]->round_performance = $performance->score;

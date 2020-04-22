@@ -72,7 +72,7 @@ composer install
 ## Demo
 - This is how application looks like
 ![demo](public/demo.png)
-- Entity Relationship Diagram
+- Entity Relationship Diagram (Initial)
 ![demo](public/Entity-Relationship-Diagram.jpeg)
 
 ## Contribute

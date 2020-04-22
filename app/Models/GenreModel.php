@@ -21,9 +21,9 @@ class GenreModel extends Model
 
     /**
      * @param $genre_id
-     * @return GenreEntity
+     * @return array|object|null
      */
-    public function getGenres($genre_id) : GenreEntity
+    public function getGenres($genre_id)
     {
         return $this->find($genre_id);
     }

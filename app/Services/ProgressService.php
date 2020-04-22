@@ -30,7 +30,7 @@ class ProgressService
         }
 
         $roundModel = new RoundModel();
-        $round = $roundModel->getNextRound();
+        $round = $roundModel->getNextRound($activeContest->id);
         if (empty($round)) {
             HistoryService::saveCompletedContest($activeContest);
 
@@ -52,7 +52,7 @@ class ProgressService
         $contestants = $contestantsModel->find($contestantIds);
 
         $contestantGenreInfoModel = new ContestantGenreInfoModel();
-        $contestantGenreInfo = $contestantGenreInfoModel->getContestantGenre();
+        $contestantGenreInfo = $contestantGenreInfoModel->getContestantGenre($contestantIds, $round->genre_id);
 
         ProgressService::executeContestantPerformance($activeContest, $round, $contestants, $contestantGenreInfo, $contestContestantsArray, $response);
 
@@ -102,6 +102,7 @@ class ProgressService
             $performance->contestant_id = $item->contestant_id;
             $performance->round_id = $round->id;
             $performance->score = $genreTotalScore;
+
 
             try {
                 $performanceModel->insert($performance);

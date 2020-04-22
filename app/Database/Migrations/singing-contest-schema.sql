@@ -121,22 +121,6 @@ CREATE TABLE `contests` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-LOCK TABLES `contests` WRITE;
-/*!40000 ALTER TABLE `contests` DISABLE KEYS */;
-
-INSERT INTO `contests` (`id`, `date_created`, `completion_status`)
-VALUES
-	(163,'2020-04-22 09:34:14',1),
-	(164,'2020-04-22 09:34:18',1),
-	(165,'2020-04-22 09:34:21',1),
-	(166,'2020-04-22 09:34:23',1),
-	(167,'2020-04-22 09:34:26',1),
-	(168,'2020-04-22 09:34:31',1),
-	(169,'2020-04-22 09:48:44',1),
-	(170,'2020-04-22 10:21:11',0);
-
-/*!40000 ALTER TABLE `contests` ENABLE KEYS */;
-UNLOCK TABLES;
 
 
 # Dump of table genre

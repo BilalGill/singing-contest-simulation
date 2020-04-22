@@ -23,22 +23,4 @@ class ContestModel extends Model
 
         return $contest;
     }
-
-    /**
-     * @param ContestEntity $contest
-     * @return bool|int|string
-     * @throws \ReflectionException
-     */
-    public function createContest(ContestEntity $contest)
-    {
-        return $this->insert($contest);
-    }
-
-    /**
-     * @param $contest
-     */
-    public function deleteContest($contest)
-    {
-        $this->delete($contest->id);
-    }
 }

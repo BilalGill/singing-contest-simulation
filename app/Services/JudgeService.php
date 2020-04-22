@@ -16,7 +16,7 @@ class JudgeService
     public static function getContestJudges($contest)
     {
         $contestJudgeModel = new ContestJudgeModel();
-        $contestJudges = $contestJudgeModel->getContestJudges();
+        $contestJudges = $contestJudgeModel->getContestJudges($contest->id);
         $judgeIds = array_column($contestJudges, 'judge_id');
         $judgeModel = new JudgeModel();
         return $judgeModel->getJudges($judgeIds);
