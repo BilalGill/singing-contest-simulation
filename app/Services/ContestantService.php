@@ -20,6 +20,7 @@ class ContestantService
      *
      * @param ContestEntity $contest
      * @return array
+     * @throws \ReflectionException
      */
     public static function createContestants(ContestEntity $contest)
     {
@@ -27,7 +28,7 @@ class ContestantService
         $response[RESPONSE_CODE] = SUCCESS;
 
         $genreModel = new GenreModel();
-        $genresList = $genreModel->findAll();
+        $genresList = $genreModel->getAllGenres();
 
         if (empty($genresList)) {
             $response[RESPONSE_CODE] = ERROR_CODE;
@@ -42,10 +43,7 @@ class ContestantService
         for ($i = 0; $i < NUMBERS_OF_CONTESTANT; $i++) {
             $contestant = new ContestantEntity();
             $contestant->date_created = date('Y-m-d G:i:s');
-            try {
-                $contestant->id = $contestantModel->insert($contestant);
-            } catch (\ReflectionException $e) {
-            }
+            $contestant->id = $contestantModel->createContestant($contestant);
             $contestantList[] = $contestant;
         }
 
@@ -61,6 +59,7 @@ class ContestantService
      *
      * @param array $contestantList
      * @param array $genresList
+     * @throws \ReflectionException
      */
     public static function createContestantGenreInfo(array $contestantList, array $genresList)
     {
@@ -71,10 +70,7 @@ class ContestantService
                 $contestantGenreInfo->genre_id = $genreItem->id;
                 $contestantGenreInfo->contestant_id = $contestant->id;
                 $contestantGenreInfo->strength = rand(1, 10);
-                try {
-                    $contestantGenreInfoModel->insert($contestantGenreInfo);
-                } catch (\ReflectionException $e) {
-                }
+                $contestantGenreInfoModel->createContestantGenreInfo($contestantGenreInfo);
             }
         }
     }
@@ -94,7 +90,7 @@ class ContestantService
             $contestContestantInfo->contestant_id = $contestant->id;
             $contestContestantInfo->contest_score = 0;
 
-            $contestContestantModel->insert($contestContestantInfo);
+            $contestContestantModel->createContestContestant($contestContestantInfo);
         }
     }
 }

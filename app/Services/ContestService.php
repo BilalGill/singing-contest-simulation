@@ -9,14 +9,6 @@ use App\Models\RoundModel;
 
 class ContestService
 {
-    /**
-     * @return array|object|null
-     */
-    public static function getActiveContest()
-    {
-        $contestModel = new ContestModel();
-        return $contestModel->where('completion_status', '0')->find();
-    }
 
     /**
      * create contest
@@ -32,7 +24,9 @@ class ContestService
         $response[RESPONSE_CODE] = SUCCESS;
         $response[RESPONSE_MESSAGE] = "Contest Created Successfully";
 
-        $activeContest = ContestService::getActiveContest();
+        $contestModel = new ContestModel();
+
+        $activeContest = $contestModel->getActiveContest();
         if (!empty($activeContest)) {
             $response[RESPONSE_CODE] = SUCCESS;
             $response[RESPONSE_MESSAGE] = "Contest Already in progress";
@@ -41,12 +35,11 @@ class ContestService
 
         $contest = new ContestEntity();
         $contest->completion_status = 0;
-        $contestModel = new ContestModel();
-        $contest->id = $contestModel->insert($contest);
+        $contest->id = $contestModel->createContest($contest);
 
         $result = JudgeService::createContestJudges($contest);
         if ($result[RESPONSE_CODE] != SUCCESS) {
-            $contestModel->delete($contest->id);
+            $contestModel->deleteContest($contest);
             $response[RESPONSE_CODE] = $result[RESPONSE_CODE];
 
             return $result;
@@ -54,7 +47,7 @@ class ContestService
 
         $result = ContestantService::createContestants($contest);
         if ($result[RESPONSE_CODE] != SUCCESS) {
-            $contestModel->delete($contest->id);
+            $contestModel->deleteContest($contest);
             $response[RESPONSE_CODE] = $result[RESPONSE_CODE];
 
             return $result;
@@ -75,40 +68,41 @@ class ContestService
     public static function getCurrentContestData()
     {
         $response = array();
-        $activeContestResult = ContestService::getActiveContest();
+        $contestModel = new ContestModel();
+        $activeContest = $contestModel->getActiveContest();
 
-        if (empty($activeContestResult)) {
+        if (empty($activeContest)) {
             $response[RESPONSE_CODE] = SUCCESS;
             $response[RESPONSE_MESSAGE] = "Contest not found";
             return $response;
         }
 
-        $activeContest = $activeContestResult[0];
         $roundModel = new RoundModel();
         $roundsCompleted = $roundModel->getCompleteRoundCount($activeContest->id);
 
         $contestantList = array();
         $contestContestantModel = new ContestContestantModel();
-        $contestContestants = $contestContestantModel->where('contest_id', $activeContest->id)->findAll();
+        $contestContestants = $contestContestantModel->getContestContestants('contest_id', $activeContest->id);
         $contestantIds = array_column($contestContestants, 'contestant_id');
 
         foreach ($contestContestants as $contestant) {
             $contestantList[$contestant->contestant_id] = $contestant;
         }
 
-        $round = $roundModel->where('contest_id', $activeContest->id)->where('completion_status', 1)->orderBy('id', 'desc')->limit(1)->find();
-        if (count($round) > 0)
-            $round = $round[0];
+        $round = $roundModel->getPreviousRound($activeContest->id);
+        if(!empty($round))
+        {
+            $performanceModel = new PerformanceModel();
+//            $latestPerformance = $performanceModel->whereIn('contestant_id', $contestantIds)->where('round_id', $round->id)->findAll();
+            $latestPerformance = $performanceModel->getContestantsRoundPerformance();
+            foreach ($latestPerformance as $performance) {
 
-        $performanceModel = new PerformanceModel();
-        $latestPerformance = $performanceModel->whereIn('contestant_id', $contestantIds)->where('round_id', $round->id)->findAll();
-        foreach ($latestPerformance as $performance) {
-
-            $contestantList[$performance->contestant_id]->round_performance = $performance->score;
+                $contestantList[$performance->contestant_id]->round_performance = $performance->score;
+            }
         }
 
         $genreModel = new GenreModel();
-        $roundGenre = $genreModel->find($round->genre_id);
+        $roundGenre = $genreModel->getGenres($round->genre_id);
 
         $response["roundsComplete"] = $roundsCompleted;
         $response["roundGenre"] = $roundGenre->genre;

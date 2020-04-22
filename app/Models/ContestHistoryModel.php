@@ -17,4 +17,13 @@ class ContestHistoryModel extends Model
         $query = $this->db->query($queryString);
         return $query->getResult();
     }
+
+    public function getPreviousContestWinners()
+    {
+        $response = array();
+        $response[RESPONSE_CODE] = SUCCESS;
+        $response[RESPONSE_DATA] = $this->orderBy('date_created', 'desc')->findAll(NUMBER_OF_PREVIOUS_CONTEST_WINNERS);
+
+        return $response;
+    }
 }

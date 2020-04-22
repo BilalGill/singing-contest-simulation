@@ -16,10 +16,10 @@ class JudgeService
     public static function getContestJudges($contest)
     {
         $contestJudgeModel = new ContestJudgeModel();
-        $contestJudges = $contestJudgeModel->where('contest_id', $contest->id)->find();
+        $contestJudges = $contestJudgeModel->getContestJudges();
         $judgeIds = array_column($contestJudges, 'judge_id');
         $judgeModel = new JudgeModel();
-        return $judgeModel->find($judgeIds);
+        return $judgeModel->getJudges($judgeIds);
     }
 
     /**
@@ -36,7 +36,7 @@ class JudgeService
         $judgeModel = new JudgeModel();
 
         // Through error if default judges not found
-        $randomJudges = $judgeModel->orderBy("RAND()")->findAll(NUMBERS_OF_JUDGES_FOR_CONTEST);
+        $randomJudges = $judgeModel->getRandomJudges();
         if (empty($randomJudges)) {
             $response[RESPONSE_CODE] = ERROR_CODE;
             $response[RESPONSE_MESSAGE] = "Judges not Found";

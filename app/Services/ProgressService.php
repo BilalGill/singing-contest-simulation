@@ -23,15 +23,14 @@ class ProgressService
         $response[RESPONSE_CODE] = SUCCESS;
 
         $contestModel = new ContestModel();
-        $activeContest = ContestService::getActiveContest();
+        $activeContest = $contestModel->getActiveContest();
         if (empty($activeContest)) {
             $response[RESPONSE_MESSAGE] = "No Active Contest Found";
             return $response;
         }
-        $activeContest = $activeContest[0];
 
         $roundModel = new RoundModel();
-        $round = $roundModel->where('contest_id', $activeContest->id)->where('completion_status', 0)->orderBy('id', 'asc')->limit(1)->find();
+        $round = $roundModel->getNextRound();
         if (empty($round)) {
             HistoryService::saveCompletedContest($activeContest);
 
@@ -42,9 +41,8 @@ class ProgressService
             return $response;
         }
 
-        $round = $round[0];
         $contestContestantModel = new ContestContestantModel();
-        $contestContestants = $contestContestantModel->where('contest_id', $activeContest->id)->findAll();
+        $contestContestants = $contestContestantModel->getContestContestants('contest_id', $activeContest->id);
         $contestContestantsArray = array();
         foreach ($contestContestants as $contestant)
             $contestContestantsArray[$contestant->contestant_id] = $contestant;
@@ -54,7 +52,7 @@ class ProgressService
         $contestants = $contestantsModel->find($contestantIds);
 
         $contestantGenreInfoModel = new ContestantGenreInfoModel();
-        $contestantGenreInfo = $contestantGenreInfoModel->whereIn('contestant_id', $contestantIds)->where('genre_id', $round->genre_id)->findAll();
+        $contestantGenreInfo = $contestantGenreInfoModel->getContestantGenre();
 
         ProgressService::executeContestantPerformance($activeContest, $round, $contestants, $contestantGenreInfo, $contestContestantsArray, $response);
 
@@ -82,7 +80,7 @@ class ProgressService
     {
         $contestContestantModel = new ContestContestantModel();
         $genreModel = new GenreModel();
-        $genre = $genreModel->find($round->genre_id);
+        $genre = $genreModel->getGenres($round->genre_id);
         $response["roundGenre"] = $genre->genre;
 
         foreach ($contestantGenreInfo as $item) {

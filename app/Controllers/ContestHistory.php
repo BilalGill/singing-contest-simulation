@@ -12,7 +12,8 @@ class ContestHistory extends BaseController
 
     public function getPreviousContestWinners()
     {
-        $previousContestWinners = HistoryService::getPreviousContestWinners();
+        $contestHistoryModel = new ContestHistoryModel();
+        $previousContestWinners = $contestHistoryModel->getPreviousContestWinners();
         echo json_encode($previousContestWinners);
     }
 

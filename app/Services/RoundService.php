@@ -14,7 +14,7 @@ class RoundService
     {
         $randomRoundsList = array();
         $genreModel = new GenreModel();
-        $randomRound = $genreModel->orderBy("RAND()")->findAll();
+        $randomRound = $genreModel->getRandomGenre();
         $roundsList = array();
         foreach ($randomRound as $genre) {
             $round = new RoundEntity();

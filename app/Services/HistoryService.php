@@ -15,30 +15,28 @@ class HistoryService
     public static function saveCompletedContest($contest)
     {
         $contestantModel = new ContestContestantModel();
-        $result = $contestantModel->getTopScorer($contest->id);
-        if (count($result) > 0) {
-            $topScorer = $result[0];
-
+        $topScorer = $contestantModel->getTopScorer($contest->id);
+        if (!empty($topScorer)) {
             $contestHistoryModel = new ContestHistoryModel();
             $contestHistoryModel->insert($topScorer);
         }
     }
 
-    /**
-     * get list of previous contests winners
-     *
-     * @return array
-     */
-    public static function getPreviousContestWinners()
-    {
-        $response = array();
-        $response[RESPONSE_CODE] = SUCCESS;
-
-        $contestHistoryModel = new ContestHistoryModel();
-        $response[RESPONSE_DATA] = $contestHistoryModel->orderBy('date_created', 'desc')->findAll(NUMBER_OF_PREVIOUS_CONTEST_WINNERS);
-
-        return $response;
-    }
+//    /**
+//     * get list of previous contests winners
+//     *
+//     * @return array
+//     */
+//    public static function getPreviousContestWinners()
+//    {
+//        $response = array();
+//        $response[RESPONSE_CODE] = SUCCESS;
+//
+//        $contestHistoryModel = new ContestHistoryModel();
+//        $response[RESPONSE_DATA] = $contestHistoryModel->orderBy('date_created', 'desc')->findAll(NUMBER_OF_PREVIOUS_CONTEST_WINNERS);
+//
+//        return $response;
+//    }
 
     /**
      * get contest with maximum score of all time
