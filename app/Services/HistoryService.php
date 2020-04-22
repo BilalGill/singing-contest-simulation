@@ -10,6 +10,7 @@ class HistoryService
      * Save completed contest info into the history table
      *
      * @param $contest
+     * @throws \ReflectionException
      */
     public static function saveCompletedContest($contest)
     {

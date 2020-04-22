@@ -42,7 +42,10 @@ class ContestantService
         for ($i = 0; $i < NUMBERS_OF_CONTESTANT; $i++) {
             $contestant = new ContestantEntity();
             $contestant->date_created = date('Y-m-d G:i:s');
-            $contestant->id = $contestantModel->insert($contestant);
+            try {
+                $contestant->id = $contestantModel->insert($contestant);
+            } catch (\ReflectionException $e) {
+            }
             $contestantList[] = $contestant;
         }
 
@@ -68,11 +71,19 @@ class ContestantService
                 $contestantGenreInfo->genre_id = $genreItem->id;
                 $contestantGenreInfo->contestant_id = $contestant->id;
                 $contestantGenreInfo->strength = rand(1, 10);
-                $contestantGenreInfoModel->insert($contestantGenreInfo);
+                try {
+                    $contestantGenreInfoModel->insert($contestantGenreInfo);
+                } catch (\ReflectionException $e) {
+                }
             }
         }
     }
 
+    /**
+     * @param ContestEntity $contest
+     * @param array $contestantList
+     * @throws \ReflectionException
+     */
     public static function createContestContestants(ContestEntity $contest, array $contestantList)
     {
         $contestContestantModel = new ContestContestantModel();

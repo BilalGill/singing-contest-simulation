@@ -89,11 +89,18 @@ class JudgeService
         return $judgesScore;
     }
 
+    /**
+     * @return int
+     */
     public function randomJudge()
     {
         return rand(1, 10);
     }
 
+    /**
+     * @param $contestantScore
+     * @return int\
+     */
     public static function honestJudge($contestantScore)
     {
         $score = 0;
@@ -121,6 +128,10 @@ class JudgeService
         return $score;
     }
 
+    /**
+     * @param $contestantScore
+     * @return int
+     */
     public static function meanJudge($contestantScore)
     {
         if ($contestantScore < 90.0)
@@ -129,6 +140,11 @@ class JudgeService
             return 10;
     }
 
+    /**
+     * @param $contestantScore
+     * @param $genre
+     * @return int
+     */
     public static function rockJudge($contestantScore, $genre)
     {
         $score = 0;
@@ -147,6 +163,11 @@ class JudgeService
         return $score;
     }
 
+    /**
+     * @param $contestantScore
+     * @param $isContestantSick
+     * @return int
+     */
     public static function friendlyJudge($contestantScore, $isContestantSick)
     {
         $score = 8;

@@ -9,6 +9,9 @@ use App\Models\RoundModel;
 
 class ContestService
 {
+    /**
+     * @return array|object|null
+     */
     public static function getActiveContest()
     {
         $contestModel = new ContestModel();
@@ -21,6 +24,7 @@ class ContestService
      * create contestant judges
      *
      * @return array
+     * @throws \ReflectionException
      */
     public static function createContest()
     {

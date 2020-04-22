@@ -7,6 +7,9 @@ use App\Models\RoundModel;
 
 class RoundService
 {
+    /**
+     * @param ContestEntity $contest
+     */
     public static function createContestRounds(ContestEntity $contest)
     {
         $randomRoundsList = array();

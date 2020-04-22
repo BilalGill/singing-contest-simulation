@@ -13,6 +13,10 @@ use App\Models\RoundModel;
 
 class ProgressService
 {
+    /**
+     * @return array
+     * @throws \ReflectionException
+     */
     public static function progressContest()
     {
         $response = array();
@@ -22,7 +26,7 @@ class ProgressService
         $activeContest = ContestService::getActiveContest();
         if (empty($activeContest)) {
             $response[RESPONSE_MESSAGE] = "No Active Contest Found";
-            return;
+            return $response;
         }
         $activeContest = $activeContest[0];
 
@@ -35,7 +39,7 @@ class ProgressService
             $contestModel->save($activeContest);
 
             $response[RESPONSE_MESSAGE] = "All Rounds Completed";
-            return;
+            return $response;
         }
 
         $round = $round[0];
@@ -55,7 +59,10 @@ class ProgressService
         ProgressService::executeContestantPerformance($activeContest, $round, $contestants, $contestantGenreInfo, $contestContestantsArray, $response);
 
         $round->completion_status = 1;
-        $roundModel->save($round);
+        try {
+            $roundModel->save($round);
+        } catch (\ReflectionException $e) {
+        }
 
         $response["roundsComplete"] = $roundModel->getCompleteRoundCount($activeContest->id);
         $response["contestantList"] = $contestContestantsArray;
@@ -63,6 +70,14 @@ class ProgressService
         return $response;
     }
 
+    /**
+     * @param ContestEntity $contest
+     * @param RoundEntity $round
+     * @param array $contestants
+     * @param array $contestantGenreInfo
+     * @param array $contestContestantsArray
+     * @param array $response
+     */
     public static function executeContestantPerformance(ContestEntity $contest, RoundEntity $round, array $contestants, array $contestantGenreInfo, array &$contestContestantsArray, array &$response)
     {
         $contestContestantModel = new ContestContestantModel();
@@ -90,19 +105,25 @@ class ProgressService
             $performance->round_id = $round->id;
             $performance->score = $genreTotalScore;
 
-            $performanceModel->insert($performance);
+            try {
+                $performanceModel->insert($performance);
 
-            $contestContestantsArray[$item->contestant_id]->round_performance = $genreTotalScore;
-            $judgeScore = JudgeService::judgesRoundScoring($contest, $genreTotalScore, $genre, $isContestantSick, $response);
+                $contestContestantsArray[$item->contestant_id]->round_performance = $genreTotalScore;
+                $judgeScore = JudgeService::judgesRoundScoring($contest, $genreTotalScore, $genre, $isContestantSick, $response);
 
-            $contestContestantsArray[$item->contestant_id]->contest_score += $judgeScore;
-            $contestContestantsArray[$item->contestant_id]->round_judge_score = $judgeScore;
-            $contestContestantsArray[$item->contestant_id]->round_performance = $genreTotalScore;
+                $contestContestantsArray[$item->contestant_id]->contest_score += $judgeScore;
+                $contestContestantsArray[$item->contestant_id]->round_judge_score = $judgeScore;
+                $contestContestantsArray[$item->contestant_id]->round_performance = $genreTotalScore;
 
-            $contestContestantModel->save($contestContestantsArray[$item->contestant_id]);
+                $contestContestantModel->save($contestContestantsArray[$item->contestant_id]);
+            } catch (\ReflectionException $e) {
+            }
         }
     }
 
+    /**
+     * @return false|float|int
+     */
     public static function generateRoundPerformanceRandomScore()
     {
         $min = 0;
@@ -116,6 +137,12 @@ class ProgressService
     }
 
     // Rounding up to two one point
+
+    /**
+     * @param $value
+     * @param int $precision
+     * @return false|float|int
+     */
     public static function ceiling($value, $precision = 0)
     {
         $offset = 0.5;
