@@ -12,7 +12,7 @@ A php web application that simulates singing competition.
 
 ## Requirements
 
-- PHP 7.4
+- PHP 7.2
 
 ## Installation
 
