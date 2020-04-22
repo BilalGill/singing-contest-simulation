@@ -56,6 +56,11 @@ class ContestService
         return $response;
     }
 
+    /**
+     * This function get Active Contest Data with all contestants and their Performances along with completed rounds info
+     *
+     * @return array
+     */
     public static function getCurrentContestData()
     {
         $response = array();
