@@ -71,7 +71,7 @@ class JudgeService
     public static function judgesRoundScoring(ContestEntity $contest, $contestantScore, $genre, $isContestantSick, &$response)
     {
         $judgesScore = 0;
-        $roundJudges = JudgeService::getContestJudgesWithTypes($contest);
+        $roundJudges = JudgeService::getContestJudges($contest);
         $response["contestJudges"] = $roundJudges;
         foreach ($roundJudges as $judge) {
             if ($judge->judge_type == "honest")
