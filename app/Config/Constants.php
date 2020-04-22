@@ -81,3 +81,9 @@ defined('NUMBERS_OF_CONTESTANT')      || define('NUMBERS_OF_CONTESTANT', 10); //
 defined('NUMBERS_OF_JUDGES_FOR_CONTEST')      || define('NUMBERS_OF_JUDGES_FOR_CONTEST', 3); //Number of judges for a contest
 defined('NUMBER_OF_PREVIOUS_CONTEST_WINNERS')      || define('NUMBER_OF_PREVIOUS_CONTEST_WINNERS', 5); //Number of previous contest winners
 defined('SICKNESS_CHANCE')      || define('SICKNESS_CHANCE', 5); //Probability of getting sick
+
+defined('RESPONSE_CODE')      || define('RESPONSE_CODE', "CODE");
+defined('RESPONSE_MESSAGE')      || define('RESPONSE_MESSAGE', "MESSAGE");
+defined('RESPONSE_DATA')      || define('RESPONSE_DATA', "DATA");
+defined('SUCCESS')      || define('SUCCESS', 0);
+defined('ERROR_CODE')      || define('ERROR_CODE', 1);

@@ -13,30 +13,39 @@ class HistoryService
         if(count($result) > 0)
         {
             $topScorer = $result[0];
-            print_r($topScorer);
+
             $contestHistoryModel = new ContestHistoryModel();
             $contestHistoryModel->insert($topScorer);
         }
-        else
-            print_r("Unexpected error occurred");
     }
 
     public static function getPreviousContestWinners()
     {
+        $response = array();
+        $response[RESPONSE_CODE] = SUCCESS;
+
         $contestHistoryModel = new ContestHistoryModel();
-        $contestantWinners = $contestHistoryModel->orderBy('date_created', 'desc')->findAll(NUMBER_OF_PREVIOUS_CONTEST_WINNERS);
-        print_r(json_encode($contestantWinners));
+        $response[RESPONSE_DATA] = $contestHistoryModel->orderBy('date_created', 'desc')->findAll(NUMBER_OF_PREVIOUS_CONTEST_WINNERS);
+
+        return $response;
     }
 
     public static function getAllTimeWinner()
     {
+        $response = array();
+        $response[RESPONSE_CODE] = SUCCESS;
+
         $contestHistoryModel = new ContestHistoryModel();
         $result = $contestHistoryModel->getAllTimeWinner();
         if(count($result) > 0)
         {
-            $allTimeWinner = $result[0];
+            $response[RESPONSE_DATA] = $result[0];
         }
         else
-            print_r("No Record Found");
+        {
+            $response[RESPONSE_MESSAGE] = "No Record Found";
+        }
+
+        return $response;
     }
 }

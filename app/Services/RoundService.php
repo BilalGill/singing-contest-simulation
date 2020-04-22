@@ -7,7 +7,7 @@ use App\Models\RoundModel;
 
 class RoundService
 {
-    public function createContestRounds(ContestEntity $contest)
+    public static function createContestRounds(ContestEntity $contest)
     {
         $randomRoundsList = array();
         $genreModel = new GenreModel();

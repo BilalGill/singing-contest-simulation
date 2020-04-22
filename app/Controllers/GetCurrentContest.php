@@ -2,11 +2,12 @@
 
 use App\Services\ContestService;
 
-class Contest extends BaseController
+class GetCurrentContest extends BaseController
 {
 	public function index()
 	{
-        $response = ContestService::createContest();
+        $response  = ContestService::getCurrentContestData();
+
         echo json_encode($response);
-    }
+	}
 }

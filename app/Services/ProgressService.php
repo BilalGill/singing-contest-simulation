@@ -15,10 +15,13 @@ class ProgressService
 {
     public static function progressContest()
     {
+        $response = array();
+        $response[RESPONSE_CODE] = SUCCESS;
+
         $contestModel = new ContestModel();
         $activeContest = ContestService::getActiveContest();
         if (empty($activeContest)) {
-            print_r("No Active Contest Found");
+            $response[RESPONSE_MESSAGE] = "No Active Contest Found";
             return;
         }
         $activeContest = $activeContest[0];
@@ -26,18 +29,18 @@ class ProgressService
         $roundModel = new RoundModel();
         $round = $roundModel->where('contest_id', $activeContest->id)->where('completion_status', 0)->orderBy('id', 'asc')->limit(1)->find();
         if (empty($round)) {
+            HistoryService::saveCompletedContest($activeContest);
+
             $activeContest->completion_status = 1;
             $contestModel->save($activeContest);
 
-            HistoryService::saveCompletedContest($activeContest);
-
-            print_r("All Rounds Completed");
+            $response[RESPONSE_MESSAGE] = "All Rounds Completed";
             return;
         }
 
         $round = $round[0];
         $contestContestantModel = new ContestContestantModel();
-        $contestContestants = $contestContestantModel->where('contest_id', $activeContest->id)->findAll($activeContest->id);
+        $contestContestants = $contestContestantModel->where('contest_id', $activeContest->id)->findAll();
         $contestContestantsArray = array();
         foreach ($contestContestants as $contestant)
             $contestContestantsArray[$contestant->contestant_id] = $contestant;
@@ -49,26 +52,34 @@ class ProgressService
         $contestantGenreInfoModel = new ContestantGenreInfoModel();
         $contestantGenreInfo = $contestantGenreInfoModel->whereIn('contestant_id', $contestantIds)->where('genre_id', $round->genre_id)->findAll();
 
-        ProgressService::executeContestantPerformance($activeContest, $round, $contestants, $contestantGenreInfo, $contestContestantsArray);
+        ProgressService::executeContestantPerformance($activeContest, $round, $contestants, $contestantGenreInfo, $contestContestantsArray, $response);
 
         $round->completion_status = 1;
         $roundModel->save($round);
+
+        $response["roundsComplete"] = $roundModel->getCompleteRoundCount($activeContest->id);
+        $response["contestantList"] = $contestContestantsArray;
+
+        return $response;
     }
 
-    public static function executeContestantPerformance(ContestEntity $contest, RoundEntity $round, array $contestants, array $contestantGenreInfo, array &$contestContestantsArray)
+    public static function executeContestantPerformance(ContestEntity $contest, RoundEntity $round, array $contestants, array $contestantGenreInfo, array &$contestContestantsArray, array &$response)
     {
         $contestContestantModel = new ContestContestantModel();
         $genreModel = new GenreModel();
         $genre = $genreModel->find($round->genre_id);
+        $response["roundGenre"] = $genre->genre;
 
         foreach ($contestantGenreInfo as $item) {
             $roundScore = ProgressService::generateRoundPerformanceRandomScore();
             $genreTotalScore = $roundScore * $item->strength;
+            $contestContestantsArray[$item->contestant_id]->is_sick = "NO";
 
             $isContestantSick = false;
             if (rand(1, 100) <= SICKNESS_CHANCE) {
                 $genreTotalScore = $genreTotalScore / 2;
                 $isContestantSick = true;
+                $contestContestantsArray[$item->contestant_id]->is_sick = "YES";
             }
 
             $genreTotalScore =  ProgressService::ceiling($genreTotalScore, 1);
@@ -81,9 +92,13 @@ class ProgressService
 
             $performanceModel->insert($performance);
 
-            $judgeScore = JudgeService::judgesRoundScoring($contest, $genreTotalScore, $genre, $isContestantSick);
+            $contestContestantsArray[$item->contestant_id]->round_performance = $genreTotalScore;
+            $judgeScore = JudgeService::judgesRoundScoring($contest, $genreTotalScore, $genre, $isContestantSick, $response);
 
             $contestContestantsArray[$item->contestant_id]->contest_score += $judgeScore;
+            $contestContestantsArray[$item->contestant_id]->round_judge_score = $judgeScore;
+            $contestContestantsArray[$item->contestant_id]->round_performance = $genreTotalScore;
+
             $contestContestantModel->save($contestContestantsArray[$item->contestant_id]);
         }
     }

@@ -15,7 +15,21 @@ use App\Models\ContestantModel;
 
 class ContestantService
 {
-    public static function createContestants(ContestEntity $contest){
+    public static function createContestants(ContestEntity $contest)
+    {
+        $response = array();
+        $response[RESPONSE_CODE] = SUCCESS;
+
+        $genreModel = new GenreModel();
+        $genresList = $genreModel->findAll();
+
+        if(empty($genresList))
+        {
+            $response[RESPONSE_CODE] = ERROR_CODE;
+            $response[RESPONSE_MESSAGE] = "Genre Details not Found";
+
+            return $response;
+        }
 
         $contestantModel = new ContestantModel();
         $contestantList = array();
@@ -28,28 +42,25 @@ class ContestantService
             $contestantList[] = $contestant;
         }
 
-        ContestantService::createContestantGenreInfo($contestantList);
+        ContestantService::createContestantGenreInfo($contestantList, $genresList);
         ContestantService::createContestContestants($contest, $contestantList);
+
+
+        return $response;
     }
 
-    public static function createContestantGenreInfo(array $contestantList)
+    public static function createContestantGenreInfo(array $contestantList, array $genresList)
     {
         $contestantGenreInfoModel = new ContestantGenreInfoModel();
-        $genreModel = new GenreModel();
-        $genres = $genreModel->findAll();
-
-        $contestantGenreInfoList = array();
         foreach ($contestantList as $contestant)
         {
-            foreach ($genres as $genreItem)
+            foreach ($genresList as $genreItem)
             {
                 $contestantGenreInfo = new ContestantGenreInfoEntity();
                 $contestantGenreInfo->genre_id = $genreItem->id;
                 $contestantGenreInfo->contestant_id = $contestant->id;
                 $contestantGenreInfo->strength = rand(1,10);
-
-                $contestantGenreInfo->id = $contestantGenreInfoModel->insert($contestantGenreInfo);
-                $contestantGenreInfoList[] = $contestantGenreInfo;
+                $contestantGenreInfoModel->insert($contestantGenreInfo);
             }
         }
     }

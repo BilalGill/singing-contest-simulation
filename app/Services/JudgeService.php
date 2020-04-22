@@ -7,11 +7,31 @@ use App\Models\ContestJudgeModel;
 
 class JudgeService
 {
+    public static function getContestJudgesWithTypes($contest)
+    {
+        $contestJudgeModel = new ContestJudgeModel();
+        $contestJudges = $contestJudgeModel->where('contest_id', $contest->id)->find();
+        $judgeIds = array_column($contestJudges, 'judge_id');
+        $judgeModel = new JudgeModel();
+        return $judgeModel->find($judgeIds);
+    }
+
     public static function createContestJudges(ContestEntity $contest)
     {
+        $response = array();
+        $response[RESPONSE_CODE] = SUCCESS;
+
         $judgeModel = new JudgeModel();
 
         $randomJudges = $judgeModel->orderBy("RAND()")->findAll(NUMBERS_OF_JUDGES_FOR_CONTEST);
+        if(empty($randomJudges))
+        {
+            $response[RESPONSE_CODE] = ERROR_CODE;
+            $response[RESPONSE_MESSAGE] = "Judges not Found";
+
+            return $response;
+        }
+
         $contestJudgesList = array();
         foreach ($randomJudges as $judge)
         {
@@ -23,17 +43,15 @@ class JudgeService
         }
         $contestJudgeModel = new ContestJudgeModel();
         $contestJudgeModel->insertBatch($contestJudgesList);
+
+        return $response;
     }
 
-    public static function judgesRoundScoring(ContestEntity $contest, $contestantScore, $genre, $isContestantSick)
+    public static function judgesRoundScoring(ContestEntity $contest, $contestantScore, $genre, $isContestantSick, &$response)
     {
         $judgesScore = 0;
-        $contestJudgeModel = new ContestJudgeModel();
-        $contestJudges = $contestJudgeModel->where('contest_id', $contest->id)->find();
-
-        $judgeIds = array_column($contestJudges, 'judge_id');
-        $judgeModel = new JudgeModel();
-        $roundJudges = $judgeModel->find($judgeIds);
+        $roundJudges = JudgeService::getContestJudgesWithTypes($contest);
+        $response["contestJudges"] = $roundJudges;
         foreach ($roundJudges as $judge)
         {
             if($judge->judge_type == "honest")
@@ -94,7 +112,7 @@ class JudgeService
     {
         $score = 0;
 
-        if($genre != "Rock")
+        if($genre->genre != "Rock")
         {
             $score = rand(1,10);
         }

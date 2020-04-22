@@ -6,6 +6,7 @@ class Progress extends BaseController
 {
 	public function index()
 	{
-        ProgressService::progressContest();
-	}
+        $response = ProgressService::progressContest();
+        echo json_encode($response);
+    }
 }
