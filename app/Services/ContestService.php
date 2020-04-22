@@ -2,7 +2,6 @@
 
 use App\Entities\ContestEntity;
 use App\Models\ContestContestantModel;
-use App\Models\ContestJudgeModel;
 use App\Models\ContestModel;
 use App\Models\GenreModel;
 use App\Models\PerformanceModel;
@@ -23,8 +22,7 @@ class ContestService
         $response[RESPONSE_MESSAGE] = "Contest Created Successfully";
 
         $activeContest = ContestService::getActiveContest();
-        if(!empty($activeContest))
-        {
+        if (!empty($activeContest)) {
             $response[RESPONSE_CODE] = SUCCESS;
             $response[RESPONSE_MESSAGE] = "Contest Already in progress";
             return $response;
@@ -36,8 +34,7 @@ class ContestService
         $contest->id = $contestModel->insert($contest);
 
         $result = JudgeService::createContestJudges($contest);
-        if($result[RESPONSE_CODE] != SUCCESS)
-        {
+        if ($result[RESPONSE_CODE] != SUCCESS) {
             $contestModel->delete($contest->id);
             $response[RESPONSE_CODE] = $result[RESPONSE_CODE];
 
@@ -45,8 +42,7 @@ class ContestService
         }
 
         $result = ContestantService::createContestants($contest);
-        if($result[RESPONSE_CODE] != SUCCESS)
-        {
+        if ($result[RESPONSE_CODE] != SUCCESS) {
             $contestModel->delete($contest->id);
             $response[RESPONSE_CODE] = $result[RESPONSE_CODE];
 
@@ -65,8 +61,7 @@ class ContestService
         $response = array();
         $activeContestResult = ContestService::getActiveContest();
 
-        if(empty($activeContestResult))
-        {
+        if (empty($activeContestResult)) {
             $response[RESPONSE_CODE] = SUCCESS;
             $response[RESPONSE_MESSAGE] = "Contest not found";
             return $response;
@@ -81,19 +76,17 @@ class ContestService
         $contestContestants = $contestContestantModel->where('contest_id', $activeContest->id)->findAll();
         $contestantIds = array_column($contestContestants, 'contestant_id');
 
-        foreach ($contestContestants as $contestant)
-        {
+        foreach ($contestContestants as $contestant) {
             $contestantList[$contestant->contestant_id] = $contestant;
         }
 
         $round = $roundModel->where('contest_id', $activeContest->id)->where('completion_status', 1)->orderBy('id', 'desc')->limit(1)->find();
-        if(count($round) > 0)
+        if (count($round) > 0)
             $round = $round[0];
 
         $performanceModel = new PerformanceModel();
         $latestPerformance = $performanceModel->whereIn('contestant_id', $contestantIds)->where('round_id', $round->id)->findAll();
-        foreach ($latestPerformance as $performance)
-        {
+        foreach ($latestPerformance as $performance) {
 
             $contestantList[$performance->contestant_id]->round_performance = $performance->score;
         }

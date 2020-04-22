@@ -7,7 +7,7 @@ class ContestContestantModel extends Model
     protected $DBGroup = 'default';
     protected $table = 'contest_contestants';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['contest_id','contestant_id','contest_score'];
+    protected $allowedFields = ['contest_id', 'contestant_id', 'contest_score'];
     protected $returnType = 'App\Entities\ContestContestantEntity';
 
     public function getTopScorer($contestId)

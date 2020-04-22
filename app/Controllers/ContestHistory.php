@@ -6,13 +6,13 @@ use App\Services\HistoryService;
 
 class ContestHistory extends BaseController
 {
-	public function index()
-	{
-	}
-
-	public function getPreviousContestWinners()
+    public function index()
     {
-        $previousContestWinners =  HistoryService::getPreviousContestWinners();
+    }
+
+    public function getPreviousContestWinners()
+    {
+        $previousContestWinners = HistoryService::getPreviousContestWinners();
         echo json_encode($previousContestWinners);
     }
 

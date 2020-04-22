@@ -82,7 +82,7 @@ class ProgressService
                 $contestContestantsArray[$item->contestant_id]->is_sick = "YES";
             }
 
-            $genreTotalScore =  ProgressService::ceiling($genreTotalScore, 1);
+            $genreTotalScore = ProgressService::ceiling($genreTotalScore, 1);
 
             $performanceModel = new PerformanceModel();
             $performance = new PerformanceEntity();
@@ -107,7 +107,7 @@ class ProgressService
     {
         $min = 0;
         $max = 10;
-        do{
+        do {
             $randomScore = rand($min * 10, $max * 10) / 10;
             $randomScore = round($randomScore, 2);
         } while ($randomScore < 0.1);
@@ -115,7 +115,8 @@ class ProgressService
         return $randomScore;
     }
 
-    public static function ceiling($value, $precision = 0) {
+    public static function ceiling($value, $precision = 0)
+    {
         $offset = 0.5;
         if ($precision !== 0)
             $offset /= pow(10, $precision);

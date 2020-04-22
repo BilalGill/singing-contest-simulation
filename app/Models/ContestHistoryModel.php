@@ -7,7 +7,7 @@ class ContestHistoryModel extends Model
     protected $DBGroup = 'default';
     protected $table = 'contest_history';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['contest_id','contestant_id','contest_score'];
+    protected $allowedFields = ['contest_id', 'contestant_id', 'contest_score'];
     protected $returnType = 'App\Entities\ContestHistoryEntity';
 
 

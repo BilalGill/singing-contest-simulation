@@ -10,8 +10,7 @@ class HistoryService
     {
         $contestantModel = new ContestContestantModel();
         $result = $contestantModel->getTopScorer($contest->id);
-        if(count($result) > 0)
-        {
+        if (count($result) > 0) {
             $topScorer = $result[0];
 
             $contestHistoryModel = new ContestHistoryModel();
@@ -37,12 +36,9 @@ class HistoryService
 
         $contestHistoryModel = new ContestHistoryModel();
         $result = $contestHistoryModel->getAllTimeWinner();
-        if(count($result) > 0)
-        {
+        if (count($result) > 0) {
             $response[RESPONSE_DATA] = $result[0];
-        }
-        else
-        {
+        } else {
             $response[RESPONSE_MESSAGE] = "No Record Found";
         }
 

@@ -4,5 +4,5 @@ class ContestEntity
 {
     public $id;
     public $date_created;
-    public  $completion_status;
+    public $completion_status;
 }

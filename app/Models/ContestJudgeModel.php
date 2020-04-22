@@ -7,6 +7,6 @@ class ContestJudgeModel extends Model
     protected $DBGroup = 'default';
     protected $table = 'contest_judges';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['contest_id','judge_type'];
+    protected $allowedFields = ['contest_id', 'judge_type'];
     protected $returnType = 'App\Entities\ContestJudgeEntity';
 }
