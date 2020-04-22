@@ -23,6 +23,10 @@ class RoundModel extends Model
         return $result[0]->rounds_completed;
     }
 
+    /**
+     * @param $contest_id
+     * @return array|mixed
+     */
     public function getPreviousRound($contest_id)
     {
         $nextRound = array();
@@ -33,12 +37,16 @@ class RoundModel extends Model
         return $nextRound;
     }
 
+    /**
+     * @param $contest_id
+     * @return array|mixed|object|null
+     */
     public function getNextRound($contest_id)
     {
         $nextRound = array();
-        $nextRound = $this->where('contest_id', $contest_id)->where('completion_status', 0)->orderBy('id', 'asc')->limit(1)->find();
-        if(count($nextRound))
-            $nextRound = $nextRound[0];
+        $result = $this->where('contest_id', $contest_id)->where('completion_status', 0)->orderBy('id', 'asc')->limit(1)->find();
+        if(count($result))
+            $nextRound = $result[0];
 
         return $nextRound;
     }

@@ -135,9 +135,9 @@ class ProgressService
         return $randomScore;
     }
 
-    // Rounding up to two one point
-
     /**
+     * Rounding up to two one point
+     *
      * @param $value
      * @param int $precision
      * @return false|float|int

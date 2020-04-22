@@ -1,6 +1,5 @@
 <?php namespace App\Models;
 
-use App\Entities\ContestEntity;
 use CodeIgniter\Model;
 
 class ContestModel extends Model

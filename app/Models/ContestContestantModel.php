@@ -11,6 +11,10 @@ class ContestContestantModel extends Model
     protected $allowedFields = ['contest_id', 'contestant_id', 'contest_score'];
     protected $returnType = 'App\Entities\ContestContestantEntity';
 
+    /**
+     * @param $contestId
+     * @return array|mixed
+     */
     public function getTopScorer($contestId)
     {
         $topScorer = array();

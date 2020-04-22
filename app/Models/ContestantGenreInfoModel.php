@@ -22,6 +22,11 @@ class ContestantGenreInfoModel extends Model
         return $this->insert($contestGenreInfo);
     }
 
+    /**
+     * @param $contestant_id
+     * @param $genre_id
+     * @return array|null
+     */
     public function getContestantGenre($contestant_id, $genre_id)
     {
         return $this->whereIn('contestant_id', $contestant_id)->where('genre_id', $genre_id)->findAll();

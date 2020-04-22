@@ -10,6 +10,10 @@ class ContestJudgeModel extends Model
     protected $allowedFields = ['contest_id', 'judge_type'];
     protected $returnType = 'App\Entities\ContestJudgeEntity';
 
+    /**
+     * @param $contest_id
+     * @return array|object|null
+     */
     public function getContestJudges($contest_id)
     {
         return $this->where('contest_id', $contest_id)->find();

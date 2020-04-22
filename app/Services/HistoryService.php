@@ -22,22 +22,6 @@ class HistoryService
         }
     }
 
-//    /**
-//     * get list of previous contests winners
-//     *
-//     * @return array
-//     */
-//    public static function getPreviousContestWinners()
-//    {
-//        $response = array();
-//        $response[RESPONSE_CODE] = SUCCESS;
-//
-//        $contestHistoryModel = new ContestHistoryModel();
-//        $response[RESPONSE_DATA] = $contestHistoryModel->orderBy('date_created', 'desc')->findAll(NUMBER_OF_PREVIOUS_CONTEST_WINNERS);
-//
-//        return $response;
-//    }
-
     /**
      * get contest with maximum score of all time
      * if two or more contestants have same score than both are selected as all time winners

@@ -1,6 +1,5 @@
 <?php namespace App\Models;
 
-use App\Entities\GenreEntity;
 use CodeIgniter\Model;
 
 class GenreModel extends Model
@@ -28,6 +27,9 @@ class GenreModel extends Model
         return $this->find($genre_id);
     }
 
+    /**
+     * @return array|null
+     */
     public function getRandomGenre()
     {
         return $this->orderBy("RAND()")->findAll();

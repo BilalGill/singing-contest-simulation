@@ -2,7 +2,6 @@
 
 
 use App\Models\ContestHistoryModel;
-use App\Services\HistoryService;
 
 class ContestHistory extends BaseController
 {

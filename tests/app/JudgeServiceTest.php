@@ -1,6 +1,8 @@
 <?php namespace App\Services;
 
 use App\Services\JudgeService;
+use PHPUnit\Framework\TestCase;
+
 
 class JudgeServiceTest extends \CIUnitTestCase
 {

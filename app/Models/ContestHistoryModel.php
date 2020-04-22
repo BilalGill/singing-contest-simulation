@@ -11,6 +11,9 @@ class ContestHistoryModel extends Model
     protected $returnType = 'App\Entities\ContestHistoryEntity';
 
 
+    /**
+     * @return array
+     */
     public function getAllTimeWinner()
     {
         $queryString = "SELECT * FROM `contest_history` WHERE contest_score=(select max(contest_score) from contest_history)";
@@ -18,6 +21,9 @@ class ContestHistoryModel extends Model
         return $query->getResult();
     }
 
+    /**
+     * @return array
+     */
     public function getPreviousContestWinners()
     {
         $response = array();
