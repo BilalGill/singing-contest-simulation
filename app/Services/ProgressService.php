@@ -115,6 +115,7 @@ class ProgressService
         return $randomScore;
     }
 
+    // Rounding up to two one point
     public static function ceiling($value, $precision = 0)
     {
         $offset = 0.5;

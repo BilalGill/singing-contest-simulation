@@ -7,7 +7,13 @@ use App\Models\JudgeModel;
 
 class JudgeService
 {
-    public static function getContestJudgesWithTypes($contest)
+    /**
+     * Return judges for any specific contest
+     *
+     * @param $contest
+     * @return array|object|null
+     */
+    public static function getContestJudges($contest)
     {
         $contestJudgeModel = new ContestJudgeModel();
         $contestJudges = $contestJudgeModel->where('contest_id', $contest->id)->find();
@@ -16,6 +22,12 @@ class JudgeService
         return $judgeModel->find($judgeIds);
     }
 
+    /**
+     * create judges for the contest
+     *
+     * @param ContestEntity $contest
+     * @return array
+     */
     public static function createContestJudges(ContestEntity $contest)
     {
         $response = array();
@@ -23,6 +35,7 @@ class JudgeService
 
         $judgeModel = new JudgeModel();
 
+        // Through error if default judges not found
         $randomJudges = $judgeModel->orderBy("RAND()")->findAll(NUMBERS_OF_JUDGES_FOR_CONTEST);
         if (empty($randomJudges)) {
             $response[RESPONSE_CODE] = ERROR_CODE;
@@ -45,6 +58,16 @@ class JudgeService
         return $response;
     }
 
+    /**
+     * Calculate scoring based on judges type
+     *
+     * @param ContestEntity $contest
+     * @param $contestantScore
+     * @param $genre
+     * @param $isContestantSick
+     * @param $response
+     * @return int
+     */
     public static function judgesRoundScoring(ContestEntity $contest, $contestantScore, $genre, $isContestantSick, &$response)
     {
         $judgesScore = 0;

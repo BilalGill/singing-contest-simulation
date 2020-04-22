@@ -15,6 +15,13 @@ class ContestService
         return $contestModel->where('completion_status', '0')->find();
     }
 
+    /**
+     * create contest
+     * create contest round info
+     * create contestant judges
+     *
+     * @return array
+     */
     public static function createContest()
     {
         $response = array();
@@ -99,10 +106,9 @@ class ContestService
         $genreModel = new GenreModel();
         $roundGenre = $genreModel->find($round->genre_id);
 
-
         $response["roundsComplete"] = $roundsCompleted;
         $response["roundGenre"] = $roundGenre->genre;
-        $response["contestJudges"] = JudgeService::getContestJudgesWithTypes($activeContest);
+        $response["contestJudges"] = JudgeService::getContestJudges($activeContest);
         $response["contestantList"] = $contestantList;
 
         return $response;

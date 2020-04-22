@@ -6,6 +6,11 @@ use App\Models\ContestHistoryModel;
 
 class HistoryService
 {
+    /**
+     * Save completed contest info into the history table
+     *
+     * @param $contest
+     */
     public static function saveCompletedContest($contest)
     {
         $contestantModel = new ContestContestantModel();
@@ -18,6 +23,11 @@ class HistoryService
         }
     }
 
+    /**
+     * get list of previous contests winners
+     *
+     * @return array
+     */
     public static function getPreviousContestWinners()
     {
         $response = array();
@@ -29,6 +39,12 @@ class HistoryService
         return $response;
     }
 
+    /**
+     * get contest with maximum score of all time
+     * if two or more contestants have same score than both are selected as all time winners
+     *
+     * @return array
+     */
     public static function getAllTimeWinner()
     {
         $response = array();

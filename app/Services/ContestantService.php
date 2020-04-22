@@ -15,6 +15,12 @@ use App\Models\GenreModel;
 
 class ContestantService
 {
+    /**
+     * create contestants
+     *
+     * @param ContestEntity $contest
+     * @return array
+     */
     public static function createContestants(ContestEntity $contest)
     {
         $response = array();
@@ -47,6 +53,12 @@ class ContestantService
         return $response;
     }
 
+    /**
+     * create contestants genre info
+     *
+     * @param array $contestantList
+     * @param array $genresList
+     */
     public static function createContestantGenreInfo(array $contestantList, array $genresList)
     {
         $contestantGenreInfoModel = new ContestantGenreInfoModel();
